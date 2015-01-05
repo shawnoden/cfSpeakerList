@@ -65,6 +65,7 @@ THIS.mappings["/core"]=ExpandPath('core');
 	<cfset APPLICATION.speakerDAO = createObject('component','core.dao.SpeakerDAO').init(datasource = datasourceObject) />
 	<cfset APPLICATION.speakerFeedbackDAO = createObject('component','core.dao.SpeakerFeedbackDAO').init(datasource = datasourceObject) />
 	<cfset APPLICATION.speakerRequestDAO = createObject('component','core.dao.SpeakerRequestDAO').init(datasource = datasourceObject) /> 
+	<cfset APPLICATION.programDAO = createObject('component','core.dao.ProgramDAO').init(datasource = datasourceObject) />
 	<cfset APPLICATION.userDAO = createObject('component','core.dao.UserDAO').init(datasource = datasourceObject) />
 	<cfset APPLICATION.eventFeedbackGateway = createObject('component','core.gateways.EventFeedbackGateway').init(datasource = datasourceObject) /> 
 	<cfset APPLICATION.speakerGateway = createObject('component','core.gateways.SpeakerGateway').init(datasource = datasourceObject) />
