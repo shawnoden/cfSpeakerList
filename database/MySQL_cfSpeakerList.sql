@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `countries`
 --
 
-CREATE TABLE `countries` (
+CREATE TABLE IF NOT EXISTS  `countries` (
   `countryId` int(11) NOT NULL AUTO_INCREMENT,
   `country` varchar(255) NOT NULL,
   PRIMARY KEY (`countryId`)
@@ -296,12 +296,41 @@ CREATE TABLE IF NOT EXISTS `event_feedback` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `program`
+--
+
+CREATE TABLE IF NOT EXISTS `programs` (
+`programId` int(11) NOT NULL AUTO_INCREMENT,
+  `programName` varchar(2048) NULL,
+  `programAbbreviation` varchar(50) NULL,
+  `programOrder` int(11) NOT NULL,
+  `programInactive` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`programID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+--
+-- Dumping data for table `program`
+--
+
+INSERT INTO `programs` (`programName`, `programAbbreviation`,`programOrder`) VALUES
+('Adobe Community Professional', 'ACP',10),
+('Adobe Education Leader', 'AEL',20),
+('Adobe Campus Leader', 'ACL',30),
+('Adobe Education Trainer', 'ACT',40),
+('Adobe Certified instructor', 'ACI',50),
+('Adobe User Group Manager', 'UGM',60),
+('Other design/development program member', NULL,1000)
+;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `speakers`
 --
 
-CREATE TABLE `speakers` (
+CREATE TABLE IF NOT EXISTS  `speakers` (
   `speakerId` int(11) NOT NULL AUTO_INCREMENT,
   `speakerKey` varchar(50) DEFAULT NULL,
   `userId` int(11) NOT NULL,
@@ -318,11 +347,19 @@ CREATE TABLE `speakers` (
   `locations` varchar(2048) NOT NULL,
   `majorCity` varchar(255) NULL,
   `isOnline` tinyint(1) NOT NULL DEFAULT '0',
-  `isACP` tinyint(1) NOT NULL DEFAULT '0',
-  `isAEL` tinyint(1) NOT NULL DEFAULT '0',
-  `isUGM` tinyint(1) NOT NULL DEFAULT '0',
-  `isOther` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`speakerId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `speakerPrograms`
+--
+
+CREATE TABLE IF NOT EXISTS  `speakerPrograms` (
+  `speakerId` int(11) NOT NULL,
+  `programId` int(11) NOT NULL,
+  `inactive` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`speakerId`,`programId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -375,7 +412,7 @@ CREATE TABLE IF NOT EXISTS `speaker_requests` (
 -- Table structure for table `states`
 --
 
-CREATE TABLE `states` (
+CREATE TABLE IF NOT EXISTS  `states` (
   `stateId` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(255)  NOT NULL,
   PRIMARY KEY (`stateId`)
@@ -444,7 +481,7 @@ INSERT INTO `states` (`stateId`, `state`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS  `users` (
   `userId` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(2048) NOT NULL,
   `password` varchar(2048) NOT NULL,
@@ -459,7 +496,7 @@ CREATE TABLE `users` (
 -- Table structure for table `sessions`
 --
 
-CREATE TABLE `sessions` (
+CREATE TABLE IF NOT EXISTS  `sessions` (
   `uniqueId` int(11) NOT NULL AUTO_INCREMENT,
   `sessionId` varchar(512)  NOT NULL,
   `userId` int(11) NOT NULL,
